@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/white"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textTitle"
@@ -63,6 +65,7 @@
         android:layout_marginEnd="40dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/border"
+        android:drawableEnd="@drawable/baseline_remove_red_eye_24"
         android:hint="@string/password"
         android:paddingStart="16dp"
         android:paddingTop="12dp"
