@@ -1,15 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/profil"
+        android:layout_width="153dp"
+        android:layout_height="149dp"
+        android:src="@drawable/profil"
+        tools:layout_editor_absoluteX="129dp"
+        tools:layout_editor_absoluteY="134dp" />
+
+    <TextView
+        android:id="@+id/textTittle6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="Arasha"
+        android:textColor="#FFB8BF"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="169dp"
+        tools:layout_editor_absoluteY="324dp" />
+
+    <ImageView
+        android:id="@+id/editPena"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:src="@drawable/edit"
+        tools:layout_editor_absoluteX="242dp"
+        tools:layout_editor_absoluteY="324dp" />
+
+
+    <ImageView
+        android:id="@+id/logoExport"
+        android:layout_width="75dp"
+        android:layout_height="85dp"
+        android:src="@drawable/export"
+        tools:layout_editor_absoluteX="48dp"
+        tools:layout_editor_absoluteY="585dp" />
+
+    <TextView
+        android:id="@+id/Email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textColor="#FFB8BF"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteX="129dp"
+        tools:layout_editor_absoluteY="414dp" />
+
+    <TextView
+        android:id="@+id/gantiPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Password"
+        android:textColor="#FFB8BF"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteX="130dp"
+        tools:layout_editor_absoluteY="518dp" />
+
+    <ImageView
+        android:id="@+id/logoLogout"
+        android:layout_width="67dp"
+        android:layout_height="75dp"
+        android:src="@drawable/logout"
+        tools:layout_editor_absoluteX="52dp"
+        tools:layout_editor_absoluteY="695dp" />
+
+    <ImageView
+        android:id="@+id/logoGantiPassword"
+        android:layout_width="71dp"
+        android:layout_height="50dp"
+        android:src="@drawable/key"
+        tools:layout_editor_absoluteX="48dp"
+        tools:layout_editor_absoluteY="504dp" />
+
+    <TextView
+        android:id="@+id/emailUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Arasha@gmail.com"
+        android:textColor="#FFB8BF"
+        android:textSize="15sp"
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteX="130dp"
+        tools:layout_editor_absoluteY="441dp" />
+
+    <TextView
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:textColor="#FFB8BF"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteX="129dp"
+        tools:layout_editor_absoluteY="716dp" />
+
+    <ImageView
+        android:id="@+id/email"
+        android:layout_width="71dp"
+        android:layout_height="50dp"
+        android:src="@drawable/email"
+        tools:layout_editor_absoluteX="48dp"
+        tools:layout_editor_absoluteY="414dp" />
+
+    <TextView
+        android:id="@+id/exportEcxel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Export File to Excel"
+        android:textColor="#FFB8BF"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteX="127dp"
+        tools:layout_editor_absoluteY="617dp" />
+
 
     <View
         android:id="@+id/footer"
         android:layout_width="0dp"
         android:layout_height="54dp"
         android:background="#FFB8BF"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
