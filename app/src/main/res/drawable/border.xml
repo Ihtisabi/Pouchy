@@ -8,5 +8,5 @@
     <corners android:radius="50dp" /> <!-- Lengkungan sudut -->
 
     <!-- Background Transparan -->
-    <solid android:color="@android:color/transparent" />
+    <solid android:color="@android:color/white" />
 </shape>
