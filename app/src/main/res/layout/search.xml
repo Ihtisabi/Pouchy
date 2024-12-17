@@ -47,6 +47,7 @@
         android:layout_marginRight="28dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
+        android:drawableEnd="@drawable/search_24"
         android:background="@drawable/border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
