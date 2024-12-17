@@ -14,6 +14,32 @@
         android:background="#FFB8BF"
         />
 
+    <!-- Recycleview untuk list transaksi -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintBottom_toTopOf="@id/footer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        app:tint="@color/white"
+        app:backgroundTint="#FFB8BF"
+        app:srcCompat="@drawable/add"
+        app:shapeAppearanceOverlay="@style/FabShapeAppearance"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/footer"
+        android:contentDescription="Add new item"/>
+
     <View
         android:id="@+id/footer"
         android:layout_width="0dp"

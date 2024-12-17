@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/border_lurus">
+
+    <!-- Icon ImageView -->
+    <TextView
+        android:id="@+id/Date"
+        android:layout_width="50dp"
+        android:layout_height="48dp"
+        android:text="01"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Title Text (e.g., Salary or Beauty) -->
+    <TextView
+        android:id="@+id/Day"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Day"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="#5B5858"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/Date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/Month_Year" />
+
+    <!-- Subtitle Text (e.g., Gaji Bulanan) -->
+    <TextView
+        android:id="@+id/Month_Year"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Month Year"
+        android:textSize="14sp"
+        android:textColor="#5B5858"
+        app:layout_constraintTop_toBottomOf="@id/Day"
+        app:layout_constraintStart_toEndOf="@id/Date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- Amount Text (e.g., +1,000,000 or -100,000) -->
+    <TextView
+        android:id="@+id/amountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1,000,000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

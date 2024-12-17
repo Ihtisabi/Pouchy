@@ -9,6 +9,9 @@ appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.9.3"
 constraintlayout = "2.2.0"
+androidChart = "3.1.0"
+dotsIndicator ="4.3"
+calenderView ="2.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -19,6 +22,12 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+# Tambahkan di bagian dependencies
+mpandroidchart = { group = "com.github.PhilJay", name = "MPAndroidChart", version.ref = "androidChart" }
+dotsindicator = {group = "com.tbuonomo", name = "dotsindicator", version.ref = "dotsIndicator"}
+calenderview = {group = "com.prolificinteractive", name = "material-calendarview", version.ref = "calenderView"}
+
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
