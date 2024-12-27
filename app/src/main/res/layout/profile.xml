@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true">
 
     <ImageView
         android:id="@+id/profil"
@@ -234,74 +235,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <View
-        android:id="@+id/footer"
-        android:layout_width="0dp"
-        android:layout_height="54dp"
-        android:background="#FFB8BF"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Wrapper for Icons -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/footer_wrapper"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:paddingStart="70dp"
-        android:paddingEnd="70dp"
-        app:layout_constraintBottom_toBottomOf="@id/footer"
-        app:layout_constraintStart_toStartOf="@id/footer"
-        app:layout_constraintEnd_toEndOf="@id/footer"
-        app:layout_constraintTop_toTopOf="@id/footer">
-
-        <!-- Icon 1 -->
-        <ImageView
-            android:id="@+id/icon1"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/home"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- Icon 2 -->
-        <ImageView
-            android:id="@+id/icon2"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/search"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/icon1"
-            app:layout_constraintEnd_toStartOf="@id/icon3"
-            app:layout_constraintHorizontal_chainStyle="spread" />
-
-        <!-- Icon 3 -->
-        <ImageView
-            android:id="@+id/icon3"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/statistic"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/icon2"
-            app:layout_constraintEnd_toStartOf="@id/icon4"
-            app:layout_constraintHorizontal_chainStyle="spread" />
-
-        <!-- Icon 4 -->
-        <ImageView
-            android:id="@+id/icon4"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/account_circle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+</androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

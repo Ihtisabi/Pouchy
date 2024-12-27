@@ -16,4 +16,5 @@
     <string name="date">Date</string>
     <string name="export">Export</string>
     <string name="username">Username</string>
+    <string name="log_in">Log In</string>
 </resources>
