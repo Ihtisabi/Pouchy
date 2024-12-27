@@ -24,5 +24,24 @@ class Login : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //Ambil Forgot Password
+        val textForgotPassword = findViewById<TextView>(R.id.textForgotPassword)
+
+        // Set onClick listener
+        textForgotPassword.setOnClickListener {
+            // Pindah ke ForgotPassword
+            val intent = Intent(this, ForgotPassword::class.java)
+            startActivity(intent)
+        }
+
+        //Ambil register
+        val register = findViewById<TextView>(R.id.textSignUp)
+
+        // Set onClick listener
+        register.setOnClickListener {
+            // Pindah ke ForgotPassword
+            val intent = Intent(this, SignUp::class.java)
+            startActivity(intent)
+        }
     }
 }
