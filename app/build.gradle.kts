@@ -7,6 +7,10 @@ android {
     namespace = "com.example.pouchy"
     compileSdk = 35
 
+    viewBinding {
+        enable = true  // Menambahkan konfigurasi ini untuk mengaktifkan View Binding
+    }
+
     defaultConfig {
         applicationId = "com.example.pouchy"
         minSdk = 24

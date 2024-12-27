@@ -21,8 +21,11 @@ import java.util.Locale
 class HomeFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var dateTextView: TextView
+    private lateinit var dateRangeTextView: TextView
     private val calendar = Calendar.getInstance()
+
+    private var startDate: Calendar? = null
+    private var endDate: Calendar? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,19 +54,21 @@ class HomeFragment : Fragment() {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, types)
         spinner.adapter = adapter
 
-        // Date TextView Setup
-        dateTextView = view.findViewById(R.id.Date_home)
-        dateTextView.setOnClickListener {
-            showDateRangePicker()
+        // Single Date Range TextView
+        dateRangeTextView = view.findViewById(R.id.Date_home)
+
+        dateRangeTextView.setOnClickListener {
+            showStartDatePicker()
         }
     }
 
-    private fun showDateRangePicker() {
+    private fun showStartDatePicker() {
         val datePicker = DatePickerDialog(
             requireContext(),
             { _, year, month, dayOfMonth ->
-                calendar.set(year, month, dayOfMonth)
-                updateDateTextView()
+                startDate = Calendar.getInstance()
+                startDate!!.set(year, month, dayOfMonth)
+                showEndDatePicker() // Automatically show end date picker after start date selection
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
@@ -72,9 +77,30 @@ class HomeFragment : Fragment() {
         datePicker.show()
     }
 
-    private fun updateDateTextView() {
+    private fun showEndDatePicker() {
+        val datePicker = DatePickerDialog(
+            requireContext(),
+            { _, year, month, dayOfMonth ->
+                endDate = Calendar.getInstance()
+                endDate!!.set(year, month, dayOfMonth)
+                updateDateRangeTextView() // Update the TextView once both dates are selected
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        datePicker.show()
+    }
+
+    private fun updateDateRangeTextView() {
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        dateTextView.text = dateFormat.format(calendar.time)
+
+        if (startDate != null && endDate != null) {
+            // Format both dates and display in a single TextView
+            val start = dateFormat.format(startDate!!.time)
+            val end = dateFormat.format(endDate!!.time)
+            dateRangeTextView.text = "$start - $end"  // Display both dates as a range
+        }
     }
 
     private fun getDummyData(): List<Transaction> {
@@ -86,6 +112,7 @@ class HomeFragment : Fragment() {
         )
     }
 }
+
 
 // Data Class for Transactions
 data class Transaction(val title: String, val type: String, val amount: Double)
