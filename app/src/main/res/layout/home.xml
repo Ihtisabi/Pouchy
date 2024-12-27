@@ -16,9 +16,9 @@
         />
     <ImageView
         android:id="@+id/iconProfil"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/salary_icon"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/pouchy_logo"
         android:padding="5dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

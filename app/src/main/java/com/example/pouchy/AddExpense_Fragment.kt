@@ -1,10 +1,12 @@
 package com.example.pouchy
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 
@@ -31,5 +33,13 @@ class AddExpense_Fragment : Fragment(R.layout.add_expense_fragment) {
 
         // Set the adapter for the Spinner
         categorySpinner.adapter = adapter
+
+        val btnSaveExpense: Button = view.findViewById(R.id.btnSaveExpense)
+
+        btnSaveExpense.setOnClickListener {
+            // Mengarahkan ke Activity lain, misal ProfileActivity
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
