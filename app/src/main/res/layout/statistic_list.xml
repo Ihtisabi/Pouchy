@@ -57,6 +57,7 @@
             android:text="1,000,000"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@android:color/holo_red_dark"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -106,6 +107,7 @@
             android:text="1,000,000"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@android:color/holo_red_dark"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -155,6 +157,7 @@
             android:text="1,000,000"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@android:color/holo_red_dark"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -204,6 +207,7 @@
             android:text="1,000,000"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@android:color/holo_red_dark"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -253,6 +257,7 @@
             android:text="1,000,000"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@android:color/holo_red_dark"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -302,6 +307,7 @@
             android:text="1,000,000"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@android:color/holo_red_dark"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -351,6 +357,7 @@
             android:text="1,000,000"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@android:color/holo_red_dark"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -400,6 +407,7 @@
             android:text="1,000,000"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@android:color/holo_green_dark"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -449,6 +457,7 @@
             android:text="1,000,000"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@android:color/holo_green_dark"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -498,6 +507,7 @@
             android:text="1,000,000"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@android:color/holo_green_dark"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -547,6 +557,7 @@
             android:text="1,000,000"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@android:color/holo_green_dark"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />

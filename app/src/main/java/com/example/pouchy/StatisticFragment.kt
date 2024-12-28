@@ -47,7 +47,7 @@ class StatisticFragment : Fragment(R.layout.statistic) {
 
         // Set specific colors for the slices
         dataSet.colors = listOf(
-            0xFFAD5C67.toInt(),  // Pink for Income
+            0xFFFFB8BF.toInt(),  // Pink for Income
             0xFF7C3943.toInt()     // Dark Red for Expense
         )
 

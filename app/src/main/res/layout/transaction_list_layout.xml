@@ -58,6 +58,18 @@
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/TransactionDate"/>
+
+    <TextView
+        android:id="@+id/TransactionDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="01/01/2025"
+        android:textSize="14sp"
+        android:textColor="#5B5858"
+        app:layout_constraintTop_toBottomOf="@id/amountText"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

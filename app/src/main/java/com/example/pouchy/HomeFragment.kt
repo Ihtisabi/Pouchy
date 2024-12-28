@@ -27,6 +27,9 @@ class HomeFragment : Fragment() {
     private var startDate: Calendar? = null
     private var endDate: Calendar? = null
 
+    private val incomeCategories = listOf("Salary", "Gift", "Transfer", "Investment")
+    private val expenseCategories = listOf("Food", "Education", "Home", "Shopping", "Snack", "Travel", "Beauty")
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -103,19 +106,29 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun determineType(title: String): String {
+        return when {
+            incomeCategories.contains(title) -> "Income"
+            expenseCategories.contains(title) -> "Expense"
+            else -> "Unknown"
+        }
+    }
+
     private fun getDummyData(): List<Transaction> {
         return listOf(
-            Transaction("Salary", "Income", 5000.0),
-            Transaction("Groceries", "Expense", -200.0),
-            Transaction("Freelance", "Income", 1500.0),
-            Transaction("Rent", "Expense", -800.0)
+            Transaction("Salary", determineType("Salary"), 5000.0, "01/12/2024"),
+            Transaction("Gift", determineType("Gift"), 200.0, "02/12/2024"),
+            Transaction("Transfer", determineType("Transfer"), 1500.0, "03/12/2024"),
+            Transaction("Investment", determineType("Investment"), 3000.0, "04/12/2024"),
+            Transaction("Food", determineType("Food"), 50.0, "05/12/2024"),
+            Transaction("Education", determineType("Education"), 200.0, "06/12/2024"),
+            Transaction("Beauty", determineType("Beauty"), 100.0, "07/12/2024")
         )
     }
 }
 
-
 // Data Class for Transactions
-data class Transaction(val title: String, val type: String, val amount: Double)
+data class Transaction(val title: String, val type: String, val amount: Double, val date: String)
 
 // Adapter for RecyclerView
 class TransactionAdapter(private val transactions: List<Transaction>) : RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
@@ -139,11 +152,44 @@ class TransactionAdapter(private val transactions: List<Transaction>) : Recycler
         private val title: TextView = itemView.findViewById(R.id.Categories)
         private val type: TextView = itemView.findViewById(R.id.Note)
         private val amount: TextView = itemView.findViewById(R.id.amountText)
+        private val date: TextView = itemView.findViewById(R.id.TransactionDate) // Assumes you have a TextView with id dateText
 
         fun bind(transaction: Transaction) {
             title.text = transaction.title
             type.text = transaction.type
-            amount.text = "${if (transaction.amount > 0) "+" else ""}${transaction.amount}"
+            amount.text = if (transaction.type == "Income") {
+                "+${transaction.amount}"
+            } else {
+                "-${transaction.amount}"
+            }
+
+            date.text = transaction.date
+
+            // Set amount text color based on type
+            if (transaction.type == "Income") {
+                amount.setTextColor(itemView.context.getColor(android.R.color.holo_green_dark))
+            } else if (transaction.type == "Expense") {
+                amount.setTextColor(itemView.context.getColor(android.R.color.holo_red_dark))
+            } else {
+                amount.setTextColor(itemView.context.getColor(android.R.color.black)) // Default color for unknown type
+            }
+
+            // Set icon based on category
+            val iconRes = when (transaction.title) {
+                "Salary" -> R.drawable.salary_icon
+                "Gift" -> R.drawable.gift_icon
+                "Transfer" -> R.drawable.transfer_icon
+                "Investment" -> R.drawable.invest_icon
+                "Food" -> R.drawable.food_icon
+                "Education" -> R.drawable.education_icon
+                "Home" -> R.drawable.home_icon
+                "Shopping" -> R.drawable.shopping_icon
+                "Snack" -> R.drawable.snack_icon
+                "Travel" -> R.drawable.travel_icon
+                "Beauty" -> R.drawable.beauty_icon
+                else -> R.drawable.salary_icon
+            }
+            icon.setImageResource(iconRes)
         }
     }
 }
