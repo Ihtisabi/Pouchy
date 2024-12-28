@@ -25,9 +25,6 @@ class AddExpense_Fragment : Fragment(R.layout.add_expense_fragment) {
         transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
         val userId = arguments?.getInt("USER_ID", -1) ?: -1
 
-        val usernameTextView = view.findViewById<TextView>(R.id.textViewExpense)
-        usernameTextView.text = userId.toString() ?: "Unknown User"
-
         // Set up Spinner
         val categories = listOf("Food", "Education", "Home", "Shopping", "Snack", "Travel", "Beauty")
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categories)
