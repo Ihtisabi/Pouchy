@@ -1,5 +1,6 @@
 package com.example.pouchy
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -32,6 +33,14 @@ class Login : AppCompatActivity() {
                 // Cari user berdasarkan email dan password
                 val user = userDao.getUserByEmailAndPassword(email, password)
                 if (user != null) {
+                    // Simpan data user ke SharedPreferences
+                    val sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+                    with(sharedPref.edit()) {
+                        putInt("USER_ID", user.uid ?: -1)
+                        putString("USERNAME", user.username)
+                        apply()
+                    }
+
                     // Login berhasil, pindah ke MainActivity
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)

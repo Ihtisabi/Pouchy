@@ -7,10 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -21,13 +21,16 @@ import java.util.Locale
 class HomeFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var transactionAdapter: TransactionAdapter
     private lateinit var dateTextView: TextView
+    private lateinit var transactionViewModel: TransactionViewModel
     private val calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.home, container, false)
     }
@@ -35,14 +38,37 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize RecyclerView
+        // ViewModel initialization
+        transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
+
+
+        // RecyclerView Setup
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.adapter = TransactionAdapter(getDummyData())
+        transactionAdapter = TransactionAdapter()
+        recyclerView.adapter = transactionAdapter
 
+        // Observe data from ViewModel
+//        transactionViewModel.getAllTransactions().observe(viewLifecycleOwner) { transactions ->
+//            transactionAdapter.updateData(transactions)
+//        }
+
+        val userId = arguments?.getInt("USER_ID")
+        val username = arguments?.getString("USERNAME")
+        val textUser = view.findViewById<TextView>(R.id.Username)
+        textUser.text = "Hi, $username!"
         // Floating Action Button
         view.findViewById<FloatingActionButton>(R.id.add).setOnClickListener {
-            startActivity(Intent(activity, AddActivity::class.java))
+            val intent = Intent(activity, AddActivity::class.java)
+            // Pass the user ID to the next activity
+            userId?.let { id -> intent.putExtra("USER_ID", id) }
+            startActivity(intent)
+        }
+
+        if (userId != null) {
+            transactionViewModel.getTransactionsByUserId(userId).observe(viewLifecycleOwner) {
+                    transactions -> transactionAdapter.updateData(transactions)
+            }
         }
 
         // Spinner Setup
@@ -75,48 +101,5 @@ class HomeFragment : Fragment() {
     private fun updateDateTextView() {
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         dateTextView.text = dateFormat.format(calendar.time)
-    }
-
-    private fun getDummyData(): List<Transaction> {
-        return listOf(
-            Transaction("Salary", "Income", 5000.0),
-            Transaction("Groceries", "Expense", -200.0),
-            Transaction("Freelance", "Income", 1500.0),
-            Transaction("Rent", "Expense", -800.0)
-        )
-    }
-}
-
-// Data Class for Transactions
-data class Transaction(val title: String, val type: String, val amount: Double)
-
-// Adapter for RecyclerView
-class TransactionAdapter(private val transactions: List<Transaction>) : RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.transaction_list_layout, parent, false)
-        return ViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val transaction = transactions[position]
-        holder.bind(transaction)
-    }
-
-    override fun getItemCount(): Int {
-        return transactions.size
-    }
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val icon: ImageView = itemView.findViewById(R.id.iconImage)
-        private val title: TextView = itemView.findViewById(R.id.Categories)
-        private val type: TextView = itemView.findViewById(R.id.Note)
-        private val amount: TextView = itemView.findViewById(R.id.amountText)
-
-        fun bind(transaction: Transaction) {
-            title.text = transaction.title
-            type.text = transaction.type
-            amount.text = "${if (transaction.amount > 0) "+" else ""}${transaction.amount}"
-        }
     }
 }

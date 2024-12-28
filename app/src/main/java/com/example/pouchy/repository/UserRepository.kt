@@ -4,6 +4,25 @@ import com.example.pouchy.data.dao.UserDao
 import com.example.pouchy.data.entity.User
 
 class UserRepository(private val userDao: UserDao) {
-    fun insertUser(user: User) = userDao.insert(user)
-    fun getUserByEmailAndPassword(email: String, password: String) = userDao.getUserByEmailAndPassword(email, password)
+
+    suspend fun insertUser(user: User): Long {
+        return userDao.insertUser(user)
+    }
+
+    suspend fun loginUser(username: String, password: String): User? {
+        return userDao.loginUser(username, password)
+    }
+
+    suspend fun getUserById(userId: Int): User? {
+        return userDao.getUserById(userId)
+    }
+
+    suspend fun updateUser(user: User) {
+        userDao.updateUser(user)
+    }
+
+    suspend fun deleteUser(user: User) {
+        userDao.deleteUser(user)
+    }
 }
+
