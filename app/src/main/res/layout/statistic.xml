@@ -17,9 +17,9 @@
 
     <ImageView
         android:id="@+id/iconProfil"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/salary_icon"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/pouchy_logo"
         android:padding="5dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -197,27 +197,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Income"
-                    android:textColor="#ED6276"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/expense"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!-- Expense Section -->
-                <TextView
-                    android:id="@+id/expense"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Expense"
+                    android:text="Summary"
                     android:textColor="#ED6276"
                     android:textSize="20dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/income"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

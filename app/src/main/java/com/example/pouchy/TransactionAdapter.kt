@@ -30,14 +30,15 @@ class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.ViewHolder>()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val title: TextView = itemView.findViewById(R.id.Categories)
-        private val type: TextView = itemView.findViewById(R.id.Note)
         private val amount: TextView = itemView.findViewById(R.id.amountText)
+        private val note: TextView = itemView.findViewById(R.id.Note)
         private val date: TextView = itemView.findViewById(R.id.TransactionDate)
 
         fun bind(transaction: Transaction) {
             title.text = transaction.kategori
-            type.text = transaction.type
-            amount.text = "${if (type.text == "Expense") "- Rp " else "+ Rp "}${transaction.jumlah}"
+            note.text = transaction.deskripsi
+            val type = transaction.type
+            amount.text = "${if (type == "Expense") "- Rp " else "+ Rp "}${transaction.jumlah}"
             date.text = transaction.tanggal
         }
     }
