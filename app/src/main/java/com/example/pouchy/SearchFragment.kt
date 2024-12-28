@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +23,10 @@ class SearchFragment : Fragment(R.layout.search) {
 
         // Initialize ViewModel
         transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
+
+        val username = arguments?.getString("USERNAME")
+        val textUser = view.findViewById<TextView>(R.id.Username)
+        textUser.text = "Hi, $username!"
 
         // Setup RecyclerView
         recyclerView = view.findViewById(R.id.recyclerView)

@@ -25,7 +25,21 @@ interface UserTransactionDao {
     @Query("SELECT * FROM transactions")
     fun getAllTransactions(): LiveData<List<Transaction>>
 
+    @Query("""
+        SELECT * FROM transactions 
+        WHERE id_user = :userId 
+        AND tanggal BETWEEN :startDate AND :endDate
+    """)
+    fun getTransactionsByUserIdAndDateRangeSync(
+        userId: Int,
+        startDate: String,
+        endDate: String
+    ): List<Transaction>
+
     @Insert
     suspend fun insert(transaction: Transaction)
+
+    @Query("SELECT * FROM transactions WHERE Tanggal BETWEEN :startDate AND :endDate")
+    fun getTransactionsByDateRange(startDate: String, endDate: String): List<Transaction>
 }
 

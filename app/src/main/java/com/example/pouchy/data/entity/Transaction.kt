@@ -7,6 +7,8 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import androidx.room.Relation
+import androidx.room.TypeConverters
+import com.example.pouchy.data.DateConverter
 
 @Entity(
     tableName = "transactions",
@@ -22,7 +24,7 @@ import androidx.room.Relation
 )
 data class Transaction(
     @PrimaryKey(autoGenerate = true) val uid: Int? = null,
-    @ColumnInfo(name = "Tanggal") val tanggal: String,
+    @ColumnInfo(name = "Tanggal")@TypeConverters(DateConverter::class) val tanggal: String,
     @ColumnInfo(name = "Type") val type: String,
     @ColumnInfo(name = "Kategori") val kategori: String,
     @ColumnInfo(name = "Deskripsi") val deskripsi: String,

@@ -22,11 +22,6 @@ class AddActivity : AppCompatActivity() {
 
         // Initialize MaterialToolbar
         val toolbar: MaterialToolbar = findViewById(R.id.material_toolbar)
-        val userId = intent.getIntExtra("USER_ID", -1) // -1 adalah nilai default jika tidak ada data
-
-        val usernameTextView = findViewById<TextView>(R.id.Username)
-        usernameTextView.text = userId.toString() ?: "Unknown User"
-
 
         // Set up navigation icon (back arrow) and listener
         toolbar.setNavigationOnClickListener {
