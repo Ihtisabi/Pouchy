@@ -41,5 +41,11 @@ interface UserTransactionDao {
 
     @Query("SELECT * FROM transactions WHERE Tanggal BETWEEN :startDate AND :endDate")
     fun getTransactionsByDateRange(startDate: String, endDate: String): List<Transaction>
+
+    @Query("""
+        SELECT * FROM transactions 
+        WHERE id_user = :userId
+    """)
+    fun getTransactionsByUserIdSync(userId: Int): List<Transaction>
 }
 

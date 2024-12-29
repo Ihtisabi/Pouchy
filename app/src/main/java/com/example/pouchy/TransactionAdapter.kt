@@ -9,12 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pouchy.data.entity.Transaction
 
 class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
+
     private val transactions = mutableListOf<Transaction>()
 
+    // Fungsi untuk memperbarui data transaksi yang ditampilkan di RecyclerView
     fun updateData(newData: List<Transaction>) {
-        transactions.clear()
-        transactions.addAll(newData)
-        notifyDataSetChanged()
+        transactions.clear()  // Menghapus data lama
+        transactions.addAll(newData)  // Menambahkan data baru
+        notifyDataSetChanged()  // Memperbarui tampilan RecyclerView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,24 +25,26 @@ class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.ViewHolder>()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(transactions[position])
+        holder.bind(transactions[position])  // Mengikat data ke dalam ViewHolder
     }
 
-    override fun getItemCount(): Int = transactions.size
+    override fun getItemCount(): Int = transactions.size  // Mengembalikan jumlah item
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val title: TextView = itemView.findViewById(R.id.Categories)
-        private val amount: TextView = itemView.findViewById(R.id.amountText)
-        private val note: TextView = itemView.findViewById(R.id.Note)
-        private val date: TextView = itemView.findViewById(R.id.TransactionDate)
+        private val title: TextView = itemView.findViewById(R.id.Categories)  // Menyimpan referensi ke TextView kategori
+        private val amount: TextView = itemView.findViewById(R.id.amountText)  // Menyimpan referensi ke TextView jumlah
+        private val note: TextView = itemView.findViewById(R.id.Note)  // Menyimpan referensi ke TextView deskripsi
+        private val date: TextView = itemView.findViewById(R.id.TransactionDate)  // Menyimpan referensi ke TextView tanggal transaksi
 
+        // Fungsi untuk mengikat data transaksi ke tampilan item
         fun bind(transaction: Transaction) {
-            title.text = transaction.kategori
-            note.text = transaction.deskripsi
-            val type = transaction.type
-            amount.text = "${if (type == "Expense") "- Rp " else "+ Rp "}${transaction.jumlah}"
-            date.text = transaction.tanggal
+            title.text = transaction.kategori  // Mengatur kategori
+            note.text = transaction.deskripsi  // Mengatur deskripsi
+            val type = transaction.type  // Menyimpan tipe (Expense atau Income)
+            amount.text = "${if (type == "Expense") "- Rp " else "+ Rp "}${transaction.jumlah}"  // Menampilkan jumlah dengan tanda (+ atau -)
+            date.text = transaction.tanggal  // Menampilkan tanggal transaksi
         }
     }
 }
+
 
