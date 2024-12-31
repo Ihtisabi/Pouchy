@@ -35,6 +35,7 @@ class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.ViewHolder>()
         private val amount: TextView = itemView.findViewById(R.id.amountText)  // Menyimpan referensi ke TextView jumlah
         private val note: TextView = itemView.findViewById(R.id.Note)  // Menyimpan referensi ke TextView deskripsi
         private val date: TextView = itemView.findViewById(R.id.TransactionDate)  // Menyimpan referensi ke TextView tanggal transaksi
+        private val icon: ImageView = itemView.findViewById(R.id.iconImage)
 
         // Fungsi untuk mengikat data transaksi ke tampilan item
         fun bind(transaction: Transaction) {
@@ -43,6 +44,23 @@ class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.ViewHolder>()
             val type = transaction.type  // Menyimpan tipe (Expense atau Income)
             amount.text = "${if (type == "Expense") "- Rp " else "+ Rp "}${transaction.jumlah}"  // Menampilkan jumlah dengan tanda (+ atau -)
             date.text = transaction.tanggal  // Menampilkan tanggal transaksi
+
+            val iconRes = when (transaction.kategori) {
+                "Salary" -> R.drawable.salary_icon
+                "Food" -> R.drawable.food_icon
+                "Gift" -> R.drawable.gift_icon
+                "Investment" -> R.drawable.invest_icon
+                "Beauty" -> R.drawable.beauty_icon
+                "Transfer" -> R.drawable.transfer_icon
+                "Travel" -> R.drawable.travel_icon
+                "Shopping" -> R.drawable.shopping_icon
+                "Education" -> R.drawable.education_icon
+                "Home" -> R.drawable.home_icon
+                "Snack" -> R.drawable.snack_icon
+                else -> R.drawable.salary_icon // Default icon jika kategori tidak ditemukan
+            }
+            icon.setImageResource(iconRes)
+
         }
     }
 }

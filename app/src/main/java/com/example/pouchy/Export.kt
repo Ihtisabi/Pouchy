@@ -103,7 +103,7 @@ class Export : AppCompatActivity() {
 
             // Header
             val headerRow = sheet.createRow(0)
-            val headers = arrayOf("ID", "Tanggal", "Kategori", "Deskripsi", "Jumlah")
+            val headers = arrayOf("No", "Tanggal", "Kategori", "Deskripsi", "Jumlah")
             headers.forEachIndexed { index, title ->
                 val cell = headerRow.createCell(index)
                 cell.setCellValue(title)
@@ -115,7 +115,7 @@ class Export : AppCompatActivity() {
             // Data rows
             transactions.forEachIndexed { index, transaction ->
                 val row = sheet.createRow(index + 1)
-                row.createCell(0).setCellValue(transaction.uid.toString())
+                row.createCell(0).setCellValue((index + 1).toString())
                 row.createCell(1).setCellValue(transaction.tanggal)
                 row.createCell(2).setCellValue(transaction.kategori)
                 row.createCell(3).setCellValue(transaction.deskripsi)

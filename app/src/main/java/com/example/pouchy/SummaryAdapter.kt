@@ -6,68 +6,52 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import java.text.NumberFormat
-import java.text.SimpleDateFormat
-import java.util.*
 
-// Adapter for RecyclerView
-class SummaryAdapter(private val summary: List<Summary>) : RecyclerView.Adapter<SummaryAdapter.ViewHolder>() {
+class SummaryAdapter(private val summaries: List<Summary>) : RecyclerView.Adapter<SummaryAdapter.SummaryViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    // Create a ViewHolder for each item
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SummaryViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.statistic_list, parent, false)
-        return ViewHolder(view)
+            .inflate(R.layout.statistic_list, parent, false) // Inflate your item layout
+        return SummaryViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val summary = summary[position]
-        holder.bind(summary)
-    }
+    // Bind data to the ViewHolder
+    override fun onBindViewHolder(holder: SummaryViewHolder, position: Int) {
+        val summary = summaries[position]
 
-    override fun getItemCount(): Int {
-        return summary.size
-    }
+        // Bind the category (title) to the TextView
+        holder.categoryTextView.text = summary.title
+        holder.amountTextView.text = "${if (summary.type == "Expense") "- Rp " else "+ Rp "}${summary.amount}"
 
-
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val icon: ImageView = itemView.findViewById(R.id.iconImage)
-        private val title: TextView = itemView.findViewById(R.id.Categories)
-        private val amount: TextView = itemView.findViewById(R.id.totalCategory_amount)
-
-        fun bind(summary: Summary) {
-            title.text = summary.title
-            amount.text = if (summary.type == "Income") {
-                "+${summary.amount}"
-            } else {
-                "-${summary.amount}"
-            }
-
-            // Set amount text color based on type
-            if (summary.type == "Income") {
-                amount.setTextColor(itemView.context.getColor(android.R.color.holo_green_dark))
-            } else if (summary.type == "Expense") {
-                amount.setTextColor(itemView.context.getColor(android.R.color.holo_red_dark))
-            } else {
-                amount.setTextColor(itemView.context.getColor(android.R.color.black)) // Default color for unknown type
-            }
-
-            // Set icon based on category
-            val iconRes = when (summary.title) {
-                "Salary" -> R.drawable.salary_icon
-                "Gift" -> R.drawable.gift_icon
-                "Transfer" -> R.drawable.transfer_icon
-                "Investment" -> R.drawable.invest_icon
-                "Food" -> R.drawable.food_icon
-                "Education" -> R.drawable.education_icon
-                "Home" -> R.drawable.home_icon
-                "Shopping" -> R.drawable.shopping_icon
-                "Snack" -> R.drawable.snack_icon
-                "Travel" -> R.drawable.travel_icon
-                "Beauty" -> R.drawable.beauty_icon
-                else -> R.drawable.salary_icon
-            }
-            icon.setImageResource(iconRes)
+        // Set the icon for the category
+        val iconResId = when (summary.title) {
+            "Salary" -> R.drawable.salary_icon // Add appropriate icon resource
+            "Gift" -> R.drawable.gift_icon
+            "Food" -> R.drawable.food_icon
+            "Transfer" -> R.drawable.transfer_icon
+            "Travel" -> R.drawable.travel_icon
+            else -> R.drawable.invest_icon // Add a default icon if needed
         }
+        holder.iconImageView.setImageResource(iconResId)
+
+        // Set color based on type (Income or Expense)
+//        if (summary.type == "Income") {
+//            holder.amountTextView.setTextColor(holder.itemView.context.getColor(R.color.white)) // Green for Income
+//        } else if (summary.type == "Expense") {
+//            holder.amountTextView.setTextColor(holder.itemView.context.getColor(R.color.black)) // Red for Expense
+//        }
+    }
+
+    // Return the number of items in the list
+    override fun getItemCount(): Int = summaries.size
+
+    // ViewHolder class that holds references to the views
+    class SummaryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val categoryTextView: TextView = itemView.findViewById(R.id.Categories)
+        val amountTextView: TextView = itemView.findViewById(R.id.totalCategory_amount)
+        val iconImageView: ImageView = itemView.findViewById(R.id.iconImage)
     }
 }
+
+

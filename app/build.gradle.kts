@@ -62,4 +62,13 @@ dependencies {
     implementation("org.apache.poi:poi-ooxml:5.2.3")
     implementation("com.jakewharton.timber:timber:5.0.1")
 
+    // Retrofit untuk API
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
+
+    // ViewModel dan LiveData
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
+
 }

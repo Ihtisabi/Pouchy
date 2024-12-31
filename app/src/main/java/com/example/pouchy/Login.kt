@@ -38,6 +38,8 @@ class Login : AppCompatActivity() {
                     with(sharedPref.edit()) {
                         putInt("USER_ID", user.uid ?: -1)
                         putString("USERNAME", user.username)
+                        putString("EMAIL", user.email)
+                        putString("PASSWORD", user.password)
                         apply()
                     }
 

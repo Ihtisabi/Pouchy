@@ -2,20 +2,15 @@ package com.example.pouchy
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pouchy.data.dao.UserTransactionDao
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.utils.ColorTemplate
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -38,106 +33,89 @@ class StatisticFragment : Fragment(R.layout.statistic) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Menampilkan username pada TextView
         val username = arguments?.getString("USERNAME")
         val textUser = view.findViewById<TextView>(R.id.Username)
         textUser.text = "Hi, $username!"
 
-        // Initialize RecyclerView
+        // Inisialisasi RecyclerView
         recyclerView = view.findViewById(R.id.recyclerViewStatistic)
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
-        allData.addAll(getDummyData())
-        filteredData.addAll(allData)
-        recyclerView.adapter = SummaryAdapter(filteredData)
+        // Inisialisasi PieChart
+        pieChart = view.findViewById(R.id.pieChart)
 
-        // Initialize the TextView for displaying the date range
+        // Inisialisasi TextView untuk menampilkan rentang tanggal
         dateRangeTextView = view.findViewById(R.id.btnDate_statistic)
 
-        // Initialize PieChart
-        pieChart = view.findViewById(R.id.pieChart)
-        setupPieChart()
-
-        // Set onClickListener to show start date picker
+        // Set onClickListener untuk menunjukkan date picker
         dateRangeTextView.setOnClickListener {
             showStartDatePicker()
         }
-    }
 
-    private fun getData(): List<Summary> {
-        val userId = arguments?.getInt("USER_ID") ?: return emptyList() // Pastikan USER_ID ada
+        // Panggil getData untuk mengambil data transaksi dan memperbarui UI setelah data tersedia
+        val userId = arguments?.getInt("USER_ID") ?: return
         val transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
 
-        val totalAmountTextView = view?.findViewById<TextView>(R.id.total_amount)
-        if (totalAmountTextView != null) {
-            totalAmountTextView.text = "$userId"
-        }
-
-        val summaries = mutableListOf<Summary>() // Hasil Summary akan disimpan di sini
-
+        // Observasi data transaksi dan proses saat data diterima
         transactionViewModel.getTransactionsByUserId(userId).observe(viewLifecycleOwner) { transactions ->
+            val summaries = mutableListOf<Summary>()
+
+            // Proses setiap transaksi yang diterima
             transactions.forEach { transaction ->
+                val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(transaction.tanggal)
                 val summary = Summary(
                     transaction.kategori,
-                    determineType(transaction.type),
+                    transaction.type,
                     transaction.jumlah,
-                    SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(transaction.tanggal)!!
+                    date ?: Date()
                 )
                 summaries.add(summary)
             }
+
+            // Perbarui UI dengan data transaksi yang sudah diproses
+            updateUI(summaries)
         }
-
-        return summaries // Kembalikan hasil Summary
     }
 
-    private fun getDummyData(): List<Summary> {
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        return listOf(
-            Summary("Salary", determineType("Salary"), 5000.0, dateFormat.parse("2024-12-01")!!),
-            Summary("Gift", determineType("Gift"), 200.0, dateFormat.parse("2024-12-05")!!),
-            Summary("Food", determineType("Food"), 50.0, dateFormat.parse("2024-12-10")!!),
-            Summary("Transfer", determineType("Transfer"), 1500.0, dateFormat.parse("2024-12-15")!!),
-            Summary("Travel", determineType("Travel"), 300.0, dateFormat.parse("2024-12-20")!!)
-        )
+    private fun updateUI(summaries: List<Summary>) {
+        // Clear the old data and add the new data
+        allData.clear()
+        allData.addAll(summaries)
+
+        // Terapkan filter tanggal jika ada
+        filterDataByDateRange()
+
+        // Update RecyclerView adapter dengan data yang difilter
+        recyclerView.adapter = SummaryAdapter(filteredData)
+
+        // Setup PieChart dengan data yang difilter
+        setupPieChart(filteredData)
     }
 
-
-    private fun setupPieChart() {
+    private fun setupPieChart(filteredData: List<Summary>) {
         val entries = mutableListOf<PieEntry>()
 
         val totalIncome = filteredData.filter { it.type == "Income" }
-            .sumOf { it.amount.toInt() }
+            .sumOf { it.amount }
 
         val totalExpense = filteredData.filter { it.type == "Expense" }
-            .sumOf { it.amount.toInt()}
+            .sumOf { it.amount }
+
 
         entries.add(PieEntry(totalIncome.toFloat(), "Income"))
         entries.add(PieEntry(totalExpense.toFloat(), "Expense"))
 
         // Menemukan TextView berdasarkan ID
         val incomeAmountTextView = view?.findViewById<TextView>(R.id.income_amount)
-        val ExpenseAmountTextView = view?.findViewById<TextView>(R.id.expense_amount)
+        val expenseAmountTextView = view?.findViewById<TextView>(R.id.expense_amount)
         val totalAmountTextView = view?.findViewById<TextView>(R.id.total_amount)
 
         // Menetapkan nilai teks baru
-        val total: Int = totalIncome - totalExpense
-        if (total < 0){
-            if (totalAmountTextView != null) {
-                totalAmountTextView.text = "- Rp ${total}"
-            }
-        } else {
-            if (totalAmountTextView != null) {
-                totalAmountTextView.text = "+ Rp ${total}"
-            }
-        }
-
-        if (incomeAmountTextView != null) {
-            incomeAmountTextView.text = "Rp ${totalIncome}"
-        }
-
-        if (ExpenseAmountTextView != null) {
-            ExpenseAmountTextView.text = "Rp ${totalExpense}"
-        }
-
+        val total: Double = totalIncome - totalExpense
+        totalAmountTextView?.text = if (total == 0.0) "-" else "Rp $total"
+        incomeAmountTextView?.text = if (total == 0.0) "-" else "Rp $totalIncome"
+        expenseAmountTextView?.text = if (total == 0.0) "-" else "Rp $totalExpense"
 
         // Setting data for PieChart
         val dataSet = PieDataSet(entries, "Income vs Expense")
@@ -192,15 +170,17 @@ class StatisticFragment : Fragment(R.layout.statistic) {
     }
 
     private fun filterDataByDateRange() {
+        filteredData.clear()
         if (startDate != null && endDate != null) {
-            filteredData.clear()
             filteredData.addAll(allData.filter {
                 val itemDate = it.date
                 itemDate >= startDate!!.time && itemDate <= endDate!!.time
             })
-            recyclerView.adapter?.notifyDataSetChanged()
-            setupPieChart() // Update PieChart based on filtered data
+        } else {
+            filteredData.addAll(allData) // If no date range, show all data
         }
+        recyclerView.adapter?.notifyDataSetChanged()
+        setupPieChart(filteredData) // Update PieChart based on filtered data
     }
 
     private fun determineType(title: String): String {
@@ -210,9 +190,8 @@ class StatisticFragment : Fragment(R.layout.statistic) {
             else -> "Unknown"
         }
     }
-
-
 }
+
 
 // Data Class for Summary
 data class Summary(val title: String, val type: String, val amount: Double, val date: Date)

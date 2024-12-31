@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         val sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         val userId = sharedPref.getInt("USER_ID", -1)
         val username = sharedPref.getString("USERNAME", "Unknown User")
+        val email = sharedPref.getString("EMAIL", "Unknown Email")
+        val password = sharedPref.getString("PASSWORD", "Unknown Password")
 
 
         // Set fragment default jika tidak ada state sebelumnya
@@ -72,6 +74,8 @@ class MainActivity : AppCompatActivity() {
                 arguments = Bundle().apply {
                     putInt("USER_ID", userId)
                     putString("USERNAME", username)
+                    putString("EMAIL", email)
+                    putString("PASSWORD", password)
                 }
             }
             replaceFragment(profileFragment)
