@@ -1,4 +1,4 @@
-package com.example.pouchy
+package com.uaspam.pouchy
 
 import org.junit.Test
 

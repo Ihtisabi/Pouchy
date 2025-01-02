@@ -11,11 +11,12 @@
         android:id="@+id/profil"
         android:layout_width="153dp"
         android:layout_height="149dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="68dp"
         android:src="@drawable/pouchy_logo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.573"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textTittle6"
@@ -31,19 +32,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profil"/>
 
+    <!-- Bagian pertama (Food) -->
+
+    <ImageView
+        android:id="@+id/editIcon"
+        android:layout_width="29dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="4dp"
+        android:contentDescription="@string/edit_username"
+        android:src="@drawable/pencil"
+        app:layout_constraintBottom_toBottomOf="@+id/textTittle6"
+        app:layout_constraintStart_toEndOf="@+id/textTittle6"
+        app:layout_constraintTop_toTopOf="@+id/textTittle6"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/adviceTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Loading advice..."
-        android:textSize="16sp"
         android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTittle6"
-        android:layout_marginTop="10dp" />
+        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textTittle6" />
 
-    <!-- Bagian pertama (Food) -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/emailLayout"
         app:layout_constraintBottom_toTopOf="@id/passwordLayout"
